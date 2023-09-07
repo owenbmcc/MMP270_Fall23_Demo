@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=3 uid="uid://c3bfqtkpqr1uq"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_o3gok"]
+[ext_resource type="Texture2D" uid="uid://jyxaly5dg6u" path="res://Sprites/ui_titles/ui_title_game_over.png" id="2_02hcf"]
+[ext_resource type="Texture2D" uid="uid://tabdctfa426i" path="res://Sprites/ui_button_start_over/ui_button_start_over0.png" id="3_dtnqf"]
+[ext_resource type="Texture2D" uid="uid://bhql55mjesq4o" path="res://Sprites/ui_button_start_over/ui_button_start_over1.png" id="4_32a7y"]
+[ext_resource type="Texture2D" uid="uid://cktco1b78t4wk" path="res://Sprites/ui_button_start_over/ui_button_start_over2.png" id="5_ia2lw"]
+[ext_resource type="Texture2D" uid="uid://0hw8fr7n0et" path="res://Sprites/ui_button_instructions/ui_button_instructions_0.png" id="7_kswli"]
+[ext_resource type="Texture2D" uid="uid://don613jvrg1ab" path="res://Sprites/ui_button_instructions/ui_button_instructions_1.png" id="8_ul380"]
+[ext_resource type="Texture2D" uid="uid://b6jn3wmenc4ik" path="res://Sprites/ui_button_instructions/ui_button_instructions_2.png" id="9_471os"]
+[ext_resource type="Texture2D" uid="uid://b7idf176mcg60" path="res://Sprites/ui_button_quit/ui_button_quit_0.png" id="10_qw8wq"]
+[ext_resource type="Texture2D" uid="uid://c8duk4yy1ywmt" path="res://Sprites/ui_button_quit/ui_button_quit_1.png" id="11_a26aj"]
+[ext_resource type="Texture2D" uid="uid://dke266c06mxft" path="res://Sprites/ui_button_quit/ui_button_quit_2.png" id="12_s26qv"]
+[ext_resource type="AudioStream" uid="uid://dov7w7du8l3t4" path="res://Audio/Button_Click.wav" id="13_jhr63"]
+[ext_resource type="AudioStream" uid="uid://be2gsxamyu1e7" path="res://Audio/Button_Hover.wav" id="14_ajbws"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o3gok")
+load_level_path = "res://Scenes/Levels/Level1.tscn"
+instructions_path = "res://Scenes/Menus/InstructionsMenu.tscn"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Graphics" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="TextureRect" parent="CenterContainer/HBoxContainer/Graphics"]
+layout_mode = 2
+texture = ExtResource("2_02hcf")
+
+[node name="Buttons" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+
+[node name="StartButton" type="TextureButton" parent="CenterContainer/HBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_dtnqf")
+texture_pressed = ExtResource("4_32a7y")
+texture_hover = ExtResource("5_ia2lw")
+
+[node name="InstructionsButton" type="TextureButton" parent="CenterContainer/HBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_kswli")
+texture_pressed = ExtResource("8_ul380")
+texture_hover = ExtResource("9_471os")
+
+[node name="QuiButton" type="TextureButton" parent="CenterContainer/HBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("10_qw8wq")
+texture_pressed = ExtResource("11_a26aj")
+texture_hover = ExtResource("12_s26qv")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_jhr63")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_ajbws")
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Buttons/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Buttons/VBoxContainer/InstructionsButton" to="." method="_on_InstructionsButton_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Buttons/VBoxContainer/QuiButton" to="." method="_on_QuitButton_pressed"]

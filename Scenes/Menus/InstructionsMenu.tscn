@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8yapye7eicq"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_e2su5"]
+[ext_resource type="Texture2D" uid="uid://dnx8tcupgscee" path="res://Sprites/ui_titles/ui_title_instructions.png" id="2_moxvp"]
+[ext_resource type="Texture2D" uid="uid://dj8ahp0to0cba" path="res://Sprites/ui_button_start/ui_button_start_0.png" id="4_nfmpt"]
+[ext_resource type="Texture2D" uid="uid://dficxtos7tbc6" path="res://Sprites/ui_button_start/ui_button_start_1.png" id="5_ktb1k"]
+[ext_resource type="Texture2D" uid="uid://b0qq2h1a56q4a" path="res://Sprites/ui_button_start/ui_button_start_2.png" id="6_1imys"]
+[ext_resource type="Texture2D" uid="uid://b7idf176mcg60" path="res://Sprites/ui_button_quit/ui_button_quit_0.png" id="10_0unqi"]
+[ext_resource type="Texture2D" uid="uid://c8duk4yy1ywmt" path="res://Sprites/ui_button_quit/ui_button_quit_1.png" id="11_6a82o"]
+[ext_resource type="Texture2D" uid="uid://dke266c06mxft" path="res://Sprites/ui_button_quit/ui_button_quit_2.png" id="12_cwvis"]
+[ext_resource type="AudioStream" uid="uid://dov7w7du8l3t4" path="res://Audio/Button_Click.wav" id="13_jhntq"]
+[ext_resource type="AudioStream" uid="uid://be2gsxamyu1e7" path="res://Audio/Button_Hover.wav" id="14_ubica"]
+
+[node name="InstructionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e2su5")
+load_level_path = "res://Scenes/Levels/Level1.tscn"
+instructions_path = "res://Scenes/Menus/InstructionsMenu.tscn"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Graphics" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="TextureRect" parent="CenterContainer/HBoxContainer/Graphics"]
+layout_mode = 2
+texture = ExtResource("2_moxvp")
+
+[node name="Buttons" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+
+[node name="StartButton" type="TextureButton" parent="CenterContainer/HBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_nfmpt")
+texture_pressed = ExtResource("5_ktb1k")
+texture_hover = ExtResource("6_1imys")
+
+[node name="QuiButton" type="TextureButton" parent="CenterContainer/HBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("10_0unqi")
+texture_pressed = ExtResource("11_6a82o")
+texture_hover = ExtResource("12_cwvis")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_jhntq")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_ubica")
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Buttons/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Buttons/VBoxContainer/QuiButton" to="." method="_on_QuitButton_pressed"]

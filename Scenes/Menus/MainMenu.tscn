@@ -1,0 +1,83 @@
+[gd_scene load_steps=15 format=3 uid="uid://c8bt88leesos2"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_gafcl"]
+[ext_resource type="Texture2D" uid="uid://dlacy73ir0kgd" path="res://Sprites/ui_titles/ui_title_title.png" id="2_vc7cj"]
+[ext_resource type="Texture2D" uid="uid://d0due8u8wn8v8" path="res://Sprites/ui_titles/ui_title_title_graphic.png" id="3_m1pvi"]
+[ext_resource type="Texture2D" uid="uid://dj8ahp0to0cba" path="res://Sprites/ui_button_start/ui_button_start_0.png" id="4_gutcf"]
+[ext_resource type="Texture2D" uid="uid://dficxtos7tbc6" path="res://Sprites/ui_button_start/ui_button_start_1.png" id="5_jvbdb"]
+[ext_resource type="Texture2D" uid="uid://b0qq2h1a56q4a" path="res://Sprites/ui_button_start/ui_button_start_2.png" id="6_c3uwb"]
+[ext_resource type="Texture2D" uid="uid://0hw8fr7n0et" path="res://Sprites/ui_button_instructions/ui_button_instructions_0.png" id="7_yfs26"]
+[ext_resource type="Texture2D" uid="uid://don613jvrg1ab" path="res://Sprites/ui_button_instructions/ui_button_instructions_1.png" id="8_eevk0"]
+[ext_resource type="Texture2D" uid="uid://b6jn3wmenc4ik" path="res://Sprites/ui_button_instructions/ui_button_instructions_2.png" id="9_g0cck"]
+[ext_resource type="Texture2D" uid="uid://b7idf176mcg60" path="res://Sprites/ui_button_quit/ui_button_quit_0.png" id="10_vn06j"]
+[ext_resource type="Texture2D" uid="uid://c8duk4yy1ywmt" path="res://Sprites/ui_button_quit/ui_button_quit_1.png" id="11_jjmaa"]
+[ext_resource type="Texture2D" uid="uid://dke266c06mxft" path="res://Sprites/ui_button_quit/ui_button_quit_2.png" id="12_u1i8j"]
+[ext_resource type="AudioStream" uid="uid://dov7w7du8l3t4" path="res://Audio/Button_Click.wav" id="13_et335"]
+[ext_resource type="AudioStream" uid="uid://be2gsxamyu1e7" path="res://Audio/Button_Hover.wav" id="14_c7jdv"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gafcl")
+load_level_path = "res://Scenes/Levels/Level1.tscn"
+instructions_path = "res://Scenes/Menus/InstructionsMenu.tscn"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Graphics" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="TextureRect" parent="CenterContainer/HBoxContainer/Graphics"]
+layout_mode = 2
+texture = ExtResource("2_vc7cj")
+
+[node name="Graphic" type="TextureRect" parent="CenterContainer/HBoxContainer/Graphics"]
+layout_mode = 2
+texture = ExtResource("3_m1pvi")
+
+[node name="Buttons" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/Buttons"]
+layout_mode = 2
+
+[node name="StartButton" type="TextureButton" parent="CenterContainer/HBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_gutcf")
+texture_pressed = ExtResource("5_jvbdb")
+texture_hover = ExtResource("6_c3uwb")
+
+[node name="InstructionsButton" type="TextureButton" parent="CenterContainer/HBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_yfs26")
+texture_pressed = ExtResource("8_eevk0")
+texture_hover = ExtResource("9_g0cck")
+
+[node name="QuiButton" type="TextureButton" parent="CenterContainer/HBoxContainer/Buttons/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("10_vn06j")
+texture_pressed = ExtResource("11_jjmaa")
+texture_hover = ExtResource("12_u1i8j")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_et335")
+
+[node name="HoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_c7jdv")
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Buttons/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Buttons/VBoxContainer/InstructionsButton" to="." method="_on_InstructionsButton_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Buttons/VBoxContainer/QuiButton" to="." method="_on_QuitButton_pressed"]

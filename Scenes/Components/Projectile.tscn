@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://boh1ogi8onbwv"]
+
+[ext_resource type="Texture2D" uid="uid://bp2rnqr0482r2" path="res://Sprites/fireball.png" id="1_a15rs"]
+[ext_resource type="Script" path="res://Scripts/Projectile.gd" id="1_enxh3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v11h8"]
+atlas = ExtResource("1_a15rs")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0qgx"]
+atlas = ExtResource("1_a15rs")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iylx0"]
+atlas = ExtResource("1_a15rs")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5njnb"]
+atlas = ExtResource("1_a15rs")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5uf0"]
+atlas = ExtResource("1_a15rs")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nxtu4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v11h8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0qgx")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iylx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5njnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5uf0")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xwymx"]
+radius = 6.0
+
+[node name="Projectile" type="Area2D"]
+collision_layer = 256
+collision_mask = 66
+script = ExtResource("1_enxh3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nxtu4")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.644156
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xwymx")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]

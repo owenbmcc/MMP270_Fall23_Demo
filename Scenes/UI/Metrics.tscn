@@ -1,0 +1,129 @@
+[gd_scene load_steps=15 format=3 uid="uid://cnm3bsabffuv0"]
+
+[ext_resource type="Script" path="res://Scripts/MetricsManager.gd" id="1_06j7p"]
+[ext_resource type="Script" path="res://Scripts/MetricCount.gd" id="2_t4yky"]
+[ext_resource type="Texture2D" uid="uid://cp6584vbga1p3" path="res://Sprites/reward_apple.png" id="2_yvx70"]
+[ext_resource type="Texture2D" uid="uid://bwix73pntevef" path="res://Sprites/reward_life.png" id="3_0x4ho"]
+[ext_resource type="Script" path="res://Scripts/MetricToggle.gd" id="4_45ry6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rf3o5"]
+atlas = ExtResource("2_yvx70")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5esff"]
+atlas = ExtResource("2_yvx70")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5dnb"]
+atlas = ExtResource("2_yvx70")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jr8nh"]
+atlas = ExtResource("2_yvx70")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ask2s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rf3o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5esff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5dnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jr8nh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq3nq"]
+atlas = ExtResource("3_0x4ho")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rwdc"]
+atlas = ExtResource("3_0x4ho")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13hu2"]
+atlas = ExtResource("3_0x4ho")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_80f7i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq3nq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rwdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13hu2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Metrics" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_right = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06j7p")
+metrics_paths = Array[NodePath]([NodePath("ItemCount"), NodePath("ItemToggle")])
+
+[node name="ItemCount" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_t4yky")
+
+[node name="Label" type="Label" parent="ItemCount"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 55.0
+offset_bottom = 36.0
+text = "0"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ItemCount"]
+position = Vector2(-11, 21)
+sprite_frames = SubResource("SpriteFrames_ask2s")
+autoplay = "default"
+frame_progress = 0.79702
+
+[node name="ItemToggle" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 42.0
+offset_top = 14.0
+offset_right = 82.0
+offset_bottom = 54.0
+script = ExtResource("4_45ry6")
+metric_name = "life"
+display_sprites_paths = Array[NodePath]([NodePath("AnimatedSprite2D"), NodePath("AnimatedSprite2D2"), NodePath("AnimatedSprite2D3")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ItemToggle"]
+position = Vector2(13, 9)
+sprite_frames = SubResource("SpriteFrames_80f7i")
+autoplay = "default"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="ItemToggle"]
+position = Vector2(56, 10)
+sprite_frames = SubResource("SpriteFrames_80f7i")
+autoplay = "default"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ItemToggle"]
+position = Vector2(100, 10)
+sprite_frames = SubResource("SpriteFrames_80f7i")
+autoplay = "default"

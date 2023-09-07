@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://c8pflfxs1k2ex"]
+
+[ext_resource type="Script" path="res://Scripts/Checkpoint.gd" id="1_ejue7"]
+[ext_resource type="Texture2D" uid="uid://c2uu57wdmeqnt" path="res://Sprites/checkpoint_active.png" id="1_nusn1"]
+[ext_resource type="Texture2D" uid="uid://blk508qvxcafn" path="res://Sprites/checkpoint_idle.png" id="2_tx6sb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ft0fk"]
+atlas = ExtResource("1_nusn1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6gpi"]
+atlas = ExtResource("1_nusn1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3masd"]
+atlas = ExtResource("1_nusn1")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wtg7"]
+atlas = ExtResource("2_tx6sb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvap4"]
+atlas = ExtResource("2_tx6sb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvmcx"]
+atlas = ExtResource("2_tx6sb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_60o4a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ft0fk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6gpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3masd")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wtg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvap4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvmcx")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yilbh"]
+size = Vector2(4, 23)
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 8
+monitorable = false
+script = ExtResource("1_ejue7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_60o4a")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.78965
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -0.5)
+shape = SubResource("RectangleShape2D_yilbh")
+
+[node name="ActivateSound" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

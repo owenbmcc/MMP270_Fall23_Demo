@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://5ub8rjh3jpq4"]
+
+[ext_resource type="Script" path="res://Scripts/ObstacleStatic.gd" id="1_rodcp"]
+[ext_resource type="Texture2D" uid="uid://buljglpgtmvgm" path="res://Sprites/obstacle_plant.png" id="2_bbow0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilar0"]
+atlas = ExtResource("2_bbow0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7xwp"]
+atlas = ExtResource("2_bbow0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuqqg"]
+atlas = ExtResource("2_bbow0")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hld5s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilar0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7xwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuqqg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5jgy5"]
+size = Vector2(14, 17)
+
+[node name="Obstacle" type="Area2D"]
+monitorable = false
+script = ExtResource("1_rodcp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hld5s")
+autoplay = "default"
+frame_progress = 0.878386
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_5jgy5")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HitTimeout" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_body_entered"]
